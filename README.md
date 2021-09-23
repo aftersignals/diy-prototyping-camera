@@ -27,6 +27,7 @@ In order to build this camera, you would need:
 * 2x 1.5mm screws - used for watches or glasses.
 
 ![Disassembled device](/static/disassembled.png)
+_Disasembled device - 3D Design._
 
 ### Manufacturing
 
@@ -42,6 +43,7 @@ Printer setup:
 #### Back cover
 
 ![Back cover part](/static/back-cover.png)
+_Back cover part - 3D Design._
 
 The back cover hosts the magnets for field attachment, the core electronics - i.e. battery, antenna pig tail and battery module -  and the cabling. Printing the back cover takes about 1h.
 
@@ -54,6 +56,7 @@ The battery module has also a configured space in the side of the part, where it
 #### Cover
 
 ![Cover part](/static/cover.png)
+_Cover part - 3D Design._
 
 The cover part hosts the ESP and the PIR. The cover slides in the back cover, creating a closed box. The two screws on the sides keep the box closed.
 
@@ -62,6 +65,7 @@ The PIR module has two holes for screwing the module into the enclosure, and the
 Attach the camera module to the ESP and fix it on top of the SD-card - usually these camera modules come with 2-sided sticky tape pasted on their back. The module should then just snap in place of the _Cover_ part, with the camera facing outwards from the case.
 
 ![Assembled device](/static/assembled.png)
+_Assembled device - 3D Design._
 
 _NOTE: Once assembled, the parts that are not directly attached should hold in-place without any movement. However, if you observe any wiggling from a component once assembled, feel free to fix it further using your glue of choice - if gluing the magnets to the part, try not to separate them further from the outside part of the case, or the camera may not have proper magnetic attachments later._
 
