@@ -83,7 +83,10 @@ export class CloudStack extends Stack {
             {
               Effect: 'Allow',
               Action: [
-                'iot:Connect'
+                'iot:Connect',
+                'iot:Publish',
+                'iot:Receive',
+                'iot:Subscribe'
               ],
               Resource: [
                 `*` // TODO
