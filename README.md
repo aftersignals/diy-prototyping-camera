@@ -2,13 +2,11 @@
 
 Welcome to the DIY Security Camera project. This repository contains documentation, design materials, firmware and software for a custom-made WiFi camera device with built-in motion sensor, for your R&D projects involving cameras and/or sensors, and to use in your next field-security project!
 
-The physical device is inspired in the work done by [@glytchtech](https://github.com/glytchtech) for his [ESPCam](https://github.com/glytchtech/ESPCam) project, with the additions of a PIR sensor for motion detection, and a new case design for the camera. Firmware and other code-pieces are custom-made.
-
-TODO Picture
+![Camera Device](/static/bodegon01.png)
 
 The device features cloud connectivity with AWS to send telemetry information and captured images, so you can incorporate a camera to any use case you need. The connection with the cloud also allows you to remotely operate and update the device, so you can effectively manage a large fleet of cameras without physically accessing them.
 
-_NOTE: This device is a prototype, meant for experimentation purposes._
+_NOTE: This device is a prototype, meant for experimentation purposes. The contents of this repository are work in progress, and they may change as the device specifications evolve._
 
 ## The device
 
@@ -28,7 +26,7 @@ In order to build this camera, you would need:
 * 1x TP4056 battery module.
 * 2x M3 nuts
 * 2x M3x6mm screws.
-* 2x 1.5mm screws - used for watches or glasses.
+* 2x 1.4mm screws - used for watches or glasses.
 
 ![Disassembled device](/static/disassembled.png)
 _Disasembled device - 3D Design._
@@ -71,27 +69,24 @@ Attach the camera module to the ESP and fix it on top of the SD-card - usually t
 ![Assembled device](/static/assembled.png)
 _Assembled device - 3D Design._
 
-_NOTE: Once assembled, the parts that are not directly attached should hold in-place without any movement. However, if you observe any wiggling from a component once assembled, feel free to fix it further using your glue of choice - if gluing the magnets to the part, try not to separate them further from the outside part of the case, or the camera may not have proper magnetic attachments later._
-
-_**Warning:** Once the device is fully assembled, the screws that close the box may be in contact with the battery pads - this is by-design, to use the screws as external battery pads. To avoid this, either use plastic screws and nuts or use some tape to cover the screws._
-
 #### Cabling
 
-Cabling should be straightforward, but some soldering is required, as jumpers may not fit in the closed box.
+The cabling of the device is simple, but there's very little space on the box for the cables. They must be tidied up in the bottom of the back cover, and carefully placed when closing the box. We may in the future design a PCB to alleviate the cabling task, as the current box is very tight.
 
-TODO Picture
-
-The PIR data pin is configured in the firmware as `GPIO12`. If you solder the connection to a different port, then you should adapt the firmware too.
+The PIR data pin is configured in the firmware as `GPIO6`. If you solder the connection to a different port, then you should adapt the firmware too.
 
 ### Firmware
 
 The firmware of the device is based on Arduino, and it has the following features: 
 
-* [ ] It connects to your configured WiFi network.
-* [ ] It allows you to visualize the video feed locally in the same network.
-* [ ] It connects to the AWS Cloud and transmits telemetry messages and image data.
-* [ ] It allows you to operate the device remotely.
+* [x] It connects to your configured WiFi network.
+* [x] It allows you to visualize the video feed locally in the same network.
+* [x] It connects to the AWS Cloud and transmits telemetry messages.
+* [x] It allows you to operate the device remotely.
+* [ ] It sends secure video streams to AWS Kinesis Video Streams.
 * [ ] It allows you to ship updates to the devices remotely.
+
+The code is based on the Arduino sample for the camera web server - tutorial available [here](https://randomnerdtutorials.com/esp32-cam-video-streaming-face-recognition-arduino-ide/) - with customizations and enhancements to enable secure cloud communications and remote operations.
 
 #### WiFi configuration
 
@@ -185,13 +180,20 @@ The cloud architecture for this project is rather simple, and it's designed to:
 
 This section is focused on the delivery of the project's architecture in the cloud, and the preliminary configuration steps to do to [configure devices to connect to it](#aws-cloud-configuration).
 
-The first step of provisioning is to actually deploy the infrastructure in the cloud. You can do that in one click by pressing the button below - you will be redirected to your AWS account for delivery.
-
-TODO 1 click delivery
-
-Once the infrastructure is delivered - it shouldn't take long to finish - your AWS account should be ready, and hosting all required infrastructure for the device's cloud features to operate correctly. Continue reading for instructions on how to configure the device to operate with the newly created infrastructure.
-
-#### Deliver from source
+_NOTE: Before continuing this section, make sure you have [generated security credentials](#iot-connection-material) for your device, and modified the file `packages/cloud/bin/cloud.ts` with your certificate ARN. This next step will activate the certificate and link it with the cloud infrastructure._
 
 The infrastructure of this project uses the [AWS CDK](https://docs.aws.amazon.com/cdk/latest/guide/home.html) 2.0, and the source code for the infrastructure can be found at `packages/cloud`. You can use the source to deploy directly using the `cdk deploy` command, or include the delivery of the infrastructure in your CICD pipelines.
 
+Once the infrastructure is delivered - it shouldn't take long to finish - your AWS account should be ready, and hosting all required infrastructure for the device's cloud features to operate correctly. Continue reading for instructions on how to configure the device to operate with the newly created infrastructure.
+
+## Coming up next
+
+We will soon publish new documentation of this device, as well as some sample use cases solved with it. Stay tuned!
+
+# Contributing
+
+If you see something is not right, please feel free to fix it and submit a PR. A good practice is to check out existing issues first, creating one if none existing applies, and give us a shout before starting your development. Thank you for your contributions!
+
+# License
+
+This repository and all its contents are released under [MIT license](/LICENSE.md).
